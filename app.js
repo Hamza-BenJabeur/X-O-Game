@@ -7,25 +7,25 @@ var reset  = [[0,0,0],
              [0,0,0]] 
 var countX = 0 
 var countO = 0
-function chefimo3afi(){
-    if(checkcolomns()!== undefined || checkrows()!== undefined || checkdiag() !== undefined){
-        document.getElementById('res').innerHTML = checkcolomns() || checkrows() || checkdiag() ; 
+function verify(){
+    if(checkAllcolomns()!== undefined || checkAllrows()!== undefined || checkdiagonals() !== undefined){
+        document.getElementById('res').innerHTML = checkAllcolomns() || checkALLrows() || checkdiagonals() ; 
         endgame()
         if(document.getElementById('res').innerHTML === "X win"){ countX++}
         if(document.getElementById('res').innerHTML === "O win"){ countO++}
     }
 }
-function hbj(id){
+function display(id){
     if(document.getElementById(id).innerHTML === ""){
     if(counter % 2 === 0){
         changeArrX(id)
         document.getElementById(id).innerHTML = "X" ;
-        chefimo3afi()
+        verify()
     }
     else {
         document.getElementById(id).innerHTML = "O"
         changeArrO(id)
-        chefimo3afi()
+        verify()
     }
     }
     counter++
@@ -52,7 +52,7 @@ var changeArrO = function(id){
     if(id === "b8"){arr[2][1]=2}
     if(id === "b9"){arr[2][2]=2}
 }
-// functio for colomns 
+
 function checkcolomn(col,v){
     var t = true 
     for(var i =0 ; i < 3 ; i++){
@@ -62,7 +62,7 @@ function checkcolomn(col,v){
     }
     return t 
 }
-function checkcolomnse(v){
+function checkcolomns(v){
     var t = false ;
     for(var i =0 ; i < 3 ; i++){
      t = t || checkcolomn(i,v) ; 
@@ -70,10 +70,10 @@ function checkcolomnse(v){
     if(t === true && v === 1){return "X win"}
     if(t === true && v === 2){return "O win"}
 }
-function checkcolomns(){
-   return  checkcolomnse(1)|| checkcolomnse(2)
+function checkAllcolomns(){
+   return  checkcolomns(1)|| checkcolomns(2)
 }
-// function for rows 
+
 function checkrow(row,v){
     var t = true 
     for(var i =0 ; i < 3 ; i++){
@@ -83,7 +83,7 @@ function checkrow(row,v){
     }
     return t 
 }
-function checkrowse(v){
+function checkrows(v){
 var t = false ;
 for(var i =0 ; i < 3 ; i++){
  t = t || checkrow(i,v) ; 
@@ -91,10 +91,10 @@ for(var i =0 ; i < 3 ; i++){
 if(t === true && v === 1){return "X win"}
 if(t === true && v === 2){return "O win"}
 }
-function checkrows(){
-    return checkrowse(1)||checkrowse(2)
+function checkAllrows(){
+    return checkrows(1)||checkrows(2)
 }
-// function for ink 
+
 function checktype(v){
  if(arr[0][0] === arr[1][1] && arr[1][1]=== arr[2][2]&& arr[0][0] === v ){
      return true 
@@ -104,14 +104,14 @@ function checktype(v){
 }
 else { return false }
 }
-function checkdiage(v){
+function checkdiagonal(v){
 if( checktype(v) && v === 1){return "X win"}
 if( checktype(v) && v === 2){return "O win"}
 }
-function checkdiag(){
-    return checkdiage(1) || checkdiage(2)
+function checkdiagonals(){
+    return checkdiagonal(1) || checkdiagonal(2)
 }
-var res = checkcolomns() || checkrows() || checkdiag() 
+var res = checkAllcolomns() || checkAllrows() || checkdiagonals() 
 function endgame(){
     var cas = ["b1","b2","b3","b4","b5","b6","b7","b8","b9"]
     for(var i =0 ; i < cas.length ; i++){
