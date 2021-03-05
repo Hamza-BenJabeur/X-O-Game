@@ -8,11 +8,11 @@ var reset  = [[0,0,0],
 var countX = 0 
 var countO = 0
 function verify(){
-    if(checkAllcolomns()!== undefined || checkAllrows()!== undefined || checkdiagonals() !== undefined){
-        document.getElementById('res').innerHTML = checkAllcolomns() || checkALLrows() || checkdiagonals() ; 
+    if(checkAllcolomns()!== undefined || checkAllrows()!== undefined || checkAlldiagonals() !== undefined){
+        document.getElementById('res').innerHTML = checkAllcolomns() || checkAllrows() || checkAlldiagonals() ; 
         endgame()
-        if(document.getElementById('res').innerHTML === "X win"){ countX++}
-        if(document.getElementById('res').innerHTML === "O win"){ countO++}
+        if(document.getElementById('res').innerHTML === "X win play again??"){ countX++}
+        if(document.getElementById('res').innerHTML === "O win play again??"){ countO++}
     }
 }
 function display(id){
@@ -52,7 +52,7 @@ var changeArrO = function(id){
     if(id === "b8"){arr[2][1]=2}
     if(id === "b9"){arr[2][2]=2}
 }
-
+// function for colomns 
 function checkcolomn(col,v){
     var t = true 
     for(var i =0 ; i < 3 ; i++){
@@ -67,13 +67,13 @@ function checkcolomns(v){
     for(var i =0 ; i < 3 ; i++){
      t = t || checkcolomn(i,v) ; 
     }
-    if(t === true && v === 1){return "X win"}
-    if(t === true && v === 2){return "O win"}
+    if(t === true && v === 1){return "X win play again??"}
+    if(t === true && v === 2){return "O win play again??"}
 }
 function checkAllcolomns(){
    return  checkcolomns(1)|| checkcolomns(2)
 }
-
+/* function that check only one row*/
 function checkrow(row,v){
     var t = true 
     for(var i =0 ; i < 3 ; i++){
@@ -83,14 +83,16 @@ function checkrow(row,v){
     }
     return t 
 }
+/*function that check all rows*/
 function checkrows(v){
 var t = false ;
 for(var i =0 ; i < 3 ; i++){
  t = t || checkrow(i,v) ; 
 }
-if(t === true && v === 1){return "X win"}
-if(t === true && v === 2){return "O win"}
+if(t === true && v === 1){return "X win play again??"}
+if(t === true && v === 2){return "O win play again??"}
 }
+/*check all rows for 3*3 X/O game*/
 function checkAllrows(){
     return checkrows(1)||checkrows(2)
 }
@@ -105,17 +107,17 @@ function checktype(v){
 else { return false }
 }
 function checkdiagonal(v){
-if( checktype(v) && v === 1){return "X win"}
-if( checktype(v) && v === 2){return "O win"}
+if( checktype(v) && v === 1){return "X win play again??"}
+if( checktype(v) && v === 2){return "O win play again??"}
 }
-function checkdiagonals(){
+function checkAlldiagonals(){
     return checkdiagonal(1) || checkdiagonal(2)
 }
-var res = checkAllcolomns() || checkAllrows() || checkdiagonals() 
+var res = checkAllcolomns() || checkAllrows() || checkAlldiagonals() 
 function endgame(){
-    var cas = ["b1","b2","b3","b4","b5","b6","b7","b8","b9"]
-    for(var i =0 ; i < cas.length ; i++){
-        var id = cas[i]
+    var inCase = ["b1","b2","b3","b4","b5","b6","b7","b8","b9"]
+    for(var i =0 ; i < inCase.length ; i++){
+        var id = inCase[i]
         document.getElementById(id).innerHTML = ""
     }
     counter = 0 
